@@ -1,0 +1,34 @@
+<!doctype html>
+<html ng-app="google">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="chrome=1">
+		<title>Google API</title>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+		<link href="./css/datepicker.css" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<!--[if lt IE 9]>
+		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+    	<input class="inputDate"/>
+		<div class="datepicker" id="datepicker"></div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="./js/datepicker.js"></script>
+		<script>
+		var now = new Date();
+		var ny = now.getFullYear();
+		var nm = now.getMonth();
+		datepicker.datepicker(ny, nm, {
+			'monthNames': ['January', 'February', 'March', 'April', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+			'dayNames': ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+		}, function(from, to){
+			alert([from, to]);
+		});
+		$('.inputDate').focus(function(){
+			$('#datepicker').addClass('active');
+		})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,64 @@
+.datepicker {
+	position: absolute;
+	display: none;
+	z-index: 3;
+}
+.datepicker.active {
+	display: block;
+}
+.datepicker .datepicker-inside {
+	background-color: #fff;
+	padding: 5px 40px;
+	border: 1px solid #999;
+	position: relative;
+}
+.datepicker table.month td,
+.datepicker table.month tr.head-days th {
+	border: 1px solid #eee;
+	text-align: center;
+	padding: 10px;
+}
+.datepicker table.month tr.head-month th {
+	text-align: center;
+}
+.datepicker td.day {
+	cursor: pointer;
+}
+.datepicker td.day:hover,
+.datepicker td.day.drag {
+	background-color: #bd1343;
+	color: #fff;
+}
+.datepicker td.day.black {
+	color: #ddd;
+}
+.datepicker .go {
+	position: absolute;
+	top: 150px;
+	font-size: 40px;
+}
+.datepicker .go a {
+	color: #999;
+}
+.datepicker .go a:hover {
+	color: #bbb;
+}
+.datepicker .go-left {
+	left: 7px;
+}
+.datepicker .go-right {
+	right: 7px;
+}
+.datepicker .close {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	font-size: 20px;
+	display: none;
+}
+.datepicker .close a {
+	color: #999;
+}
+.datepicker .close a:hover {
+	color: #bbb;
+}
