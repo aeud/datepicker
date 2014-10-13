@@ -13,19 +13,33 @@
 		<![endif]-->
 	</head>
 	<body>
-		<form class="form-inline" role="form" action="#">
-			<div class="form-group">
-				<span class="form-control" id="fromDisplay" name="from">Check in</span>
-				<input type="hidden" name="from" value="" id="fromInput">
-				<div class="vf-datepicker" id="startDP"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8">
+					<form class="" role="form" action="#">
+						<div class="row">
+							<div class="col-sm-4">
+								<div class="form-group">
+									<span class="form-control" id="fromDisplay" name="from">Check in</span>
+									<input type="hidden" name="from" value="" id="fromInput">
+									<div class="vf-datepicker" id="startDP"></div>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="form-group">
+									<span class="form-control" id="toDisplay">Check out</span>
+									<input type="hidden" name="to" value="" id="toInput">
+									<div class="vf-datepicker" id="endDP"></div>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<button type="submit" class="btn btn-default btn-block">Search</button>
+							</div>
+						</div>
+					</form>
+				</div>
 			</div>
-			<div class="form-group">
-				<span class="form-control" id="toDisplay">Check out</span>
-				<input type="hidden" name="to" value="" id="toInput">
-				<div class="vf-datepicker" id="endDP"></div>
-			</div>
-			<button type="submit" class="btn btn-default">Sign in</button>
-		</form>
+		</div>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script src="./js/datepicker.js"></script>
 		<script>
