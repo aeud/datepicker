@@ -5,6 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="chrome=1">
 		<title>Google API</title>
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 		<link href="./css/datepicker.css" rel="stylesheet">
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 		<!--[if lt IE 9]>
@@ -12,7 +13,7 @@
 		<![endif]-->
 	</head>
 	<body>
-    	<input class="inputDate"/>
+    	<input class="inputFrom"/><input class="inputTo"/>
 		<div class="datepicker" id="datepicker"></div>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script src="./js/datepicker.js"></script>
@@ -20,15 +21,35 @@
 		var now = new Date();
 		var ny = now.getFullYear();
 		var nm = now.getMonth();
-		datepicker.datepicker(ny, nm, {
-			'monthNames': ['January', 'February', 'March', 'April', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+		VF_datepicker.datepicker(ny, nm, {
+			'monthNames': ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
 			'dayNames': ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+			'init': function(){
+				VF_datepicker.helper('Select your departure date.');
+			},
+			'from_chosen': function(from){
+				VF_datepicker.helper('Select your leaving date.');
+				$('.inputFrom').val(from);
+			},
+			'to_chosen': function(from, to){
+				VF_datepicker.close();
+				$('.inputFrom').val(from);
+				$('.inputTo').val(to);
+			},
 		}, function(from, to){
-			alert([from, to]);
+			//alert([from, to]);
 		});
-		$('.inputDate').focus(function(){
-			$('#datepicker').addClass('active');
-		})
+		$('.inputFrom').focus(function(){
+			VF_datepicker.show('Select your departure date.');
+		});
+		$('.inputTo').focus(function(){
+			if (VF_datepicker.from) {
+				VF_datepicker.show('Select your leaving date.');	
+			} else {
+				VF_datepicker.show('Select your departure date.');
+			}
+			VF_datepicker.removeTo();
+		});
 		</script>
 	</body>
 </html>

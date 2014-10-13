@@ -1,5 +1,10 @@
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+	padding: 0px;
+	line-height: 1.42857143;
+	vertical-align: top;
+	border-top: none;
+}
 .datepicker {
-	position: absolute;
 	display: none;
 	z-index: 3;
 }
@@ -8,37 +13,61 @@
 }
 .datepicker .datepicker-inside {
 	background-color: #fff;
-	padding: 5px 40px;
-	border: 1px solid #999;
+	padding: 5px 5px;
 	position: relative;
+}
+.datepicker .pre-table {
+	margin: auto;
+	position: relative;
+}
+.datepicker .pre-table table {
+	margin: auto;
 }
 .datepicker table.month td,
 .datepicker table.month tr.head-days th {
-	border: 1px solid #eee;
 	text-align: center;
-	padding: 10px;
+	padding: 2px;
 }
 .datepicker table.month tr.head-month th {
 	text-align: center;
+	padding: 5px 0 10px;
 }
-.datepicker td.day {
+.datepicker .datepicker-table {
+	padding: 5px 10px;
+}
+.datepicker .week {
+	border-bottom: 1px solid #E6E4E4;
+}
+.datepicker .week .day {
 	cursor: pointer;
+	border-radius: 50%;
+	width: 35px;
+	height: 35px;
+	position: relative;
 }
-.datepicker td.day:hover,
-.datepicker td.day.drag {
+.datepicker .week .day .value {
+	position: absolute;
+	top: 8px;
+	left: 0px;
+	right: 0px;
+	text-align: center;
+}
+.datepicker .week .day:hover,
+.datepicker .week .day.drag-from,
+.datepicker .week .day.drag-to {
 	background-color: #bd1343;
 	color: #fff;
 }
-.datepicker td.day.black {
-	color: #ddd;
+.datepicker .day.black {
+	color: #eee;
 }
 .datepicker .go {
 	position: absolute;
-	top: 150px;
-	font-size: 40px;
+	top: 5px;
+	font-size: 20px;
 }
 .datepicker .go a {
-	color: #999;
+	color: #1d1d1d;
 }
 .datepicker .go a:hover {
 	color: #bbb;
@@ -61,4 +90,50 @@
 }
 .datepicker .close a:hover {
 	color: #bbb;
+}
+.datepicker .request-full {
+	background-color: rgba(241,241,241,1);
+}
+.datepicker .request-pm {
+	background: rgb(255,255,255);
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iNTAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iNTAlIiBzdG9wLWNvbG9yPSIjZWQ5ZTgyIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iNTAlIiBzdG9wLWNvbG9yPSIjZWQ5ZTgyIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2VkOWU4MiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
+	background: -moz-linear-gradient(-45deg,  rgba(255,255,255,1) 0%, rgba(255,255,255,1) 50%, rgba(241,241,241,1) 50%, rgba(241,241,241,1) 50%, rgba(241,241,241,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(50%,rgba(255,255,255,1)), color-stop(50%,rgba(241,241,241,1)), color-stop(50%,rgba(241,241,241,1)), color-stop(100%,rgba(241,241,241,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(-45deg,  rgba(255,255,255,1) 0%,rgba(255,255,255,1) 50%,rgba(241,241,241,1) 50%,rgba(241,241,241,1) 50%,rgba(241,241,241,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(-45deg,  rgba(255,255,255,1) 0%,rgba(255,255,255,1) 50%,rgba(241,241,241,1) 50%,rgba(241,241,241,1) 50%,rgba(241,241,241,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(-45deg,  rgba(255,255,255,1) 0%,rgba(255,255,255,1) 50%,rgba(241,241,241,1) 50%,rgba(241,241,241,1) 50%,rgba(241,241,241,1) 100%); /* IE10+ */
+	background: linear-gradient(135deg,  rgba(255,255,255,1) 0%,rgba(255,255,255,1) 50%,rgba(241,241,241,1) 50%,rgba(241,241,241,1) 50%,rgba(241,241,241,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ed9e82',GradientType=1 ); /* IE6-8 fallback on horizontal gradient */
+	
+}
+.datepicker .request-am {
+	background: rgb(237,158,130);
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZWQ5ZTgyIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iNTAlIiBzdG9wLWNvbG9yPSIjZWQ5ZTgyIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iNTAlIiBzdG9wLWNvbG9yPSIjZWQ5ZTgyIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iNTAlIiBzdG9wLWNvbG9yPSIjZmZmZmZmIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
+	background: -moz-linear-gradient(-45deg,  rgba(241,241,241,1) 0%, rgba(241,241,241,1) 50%, rgba(241,241,241,1) 50%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(241,241,241,1)), color-stop(50%,rgba(241,241,241,1)), color-stop(50%,rgba(241,241,241,1)), color-stop(50%,rgba(255,255,255,1)), color-stop(100%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(-45deg,  rgba(241,241,241,1) 0%,rgba(241,241,241,1) 50%,rgba(241,241,241,1) 50%,rgba(255,255,255,1) 50%,rgba(255,255,255,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(-45deg,  rgba(241,241,241,1) 0%,rgba(241,241,241,1) 50%,rgba(241,241,241,1) 50%,rgba(255,255,255,1) 50%,rgba(255,255,255,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(-45deg,  rgba(241,241,241,1) 0%,rgba(241,241,241,1) 50%,rgba(241,241,241,1) 50%,rgba(255,255,255,1) 50%,rgba(255,255,255,1) 100%); /* IE10+ */
+	background: linear-gradient(135deg,  rgba(241,241,241,1) 0%,rgba(241,241,241,1) 50%,rgba(241,241,241,1) 50%,rgba(255,255,255,1) 50%,rgba(255,255,255,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ed9e82', endColorstr='#ffffff',GradientType=1 ); /* IE6-8 fallback on horizontal gradient */
+	
+}
+.datepicker .dates {
+	text-align: left;
+	margin: 5px;
+	min-height: 20px;
+}
+.datepicker .dates .date {
+	display: none;
+	padding: 5px 35px 5px 15px;
+	background-color: #e9e9e9;
+	margin: 0 5px;
+	border-radius: 5px;
+	position: relative;
+}
+.datepicker .dates .date .fa-times {
+	position: absolute;
+	top: 6px;
+	right: 8px;
+	
 }
