@@ -2,7 +2,6 @@ var VF_datepicker = {
 	drag: 0,
 	currentYear: 0,
 	currentMonth: 0,
-	callback: null,
 	start: null,
 	end: null,
 	options: {},
@@ -16,7 +15,7 @@ var VF_datepicker = {
 	endDP: null,
 	startDisplayOriginal: null,
 	endDisplayOriginal: null,
-	datepicker: function(ny, nm, options, callback){
+	datepicker: function(ny, nm, options){
 		prev = null;
 		VF_datepicker.options = options;
 		VF_datepicker.startCtrl = VF_datepicker.options.startCtrl;
@@ -45,12 +44,11 @@ var VF_datepicker = {
 		html += '</tr>';
 		html += '</table>';
 		html += '</div>';
-		html += '<a class="vf-clear" href="#">Clear dates</a>';
+		html += '<a class="vf-clear" href="#">' + VF_datepicker.options.clearTxt + '</a>';
 		html += '</div>';
 		$('.vf-datepicker').html(html);
 		VF_datepicker.displayMonths(ny, nm);
 		VF_datepicker.controlArrows();
-		if (callback) this.callback = callback;
 		$('.show-datepicker').click(function(){
 			$('.vf-datepicker').addClass('active');
 			return false;

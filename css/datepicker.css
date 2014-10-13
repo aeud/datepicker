@@ -1,4 +1,4 @@
-.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+.vf-datepicker .table>thead>tr>th, .vf-datepicker .table>tbody>tr>th, .vf-datepicker .table>tfoot>tr>th, .vf-datepicker .table>thead>tr>td, .vf-datepicker .table>tbody>tr>td, .vf-datepicker .table>tfoot>tr>td {
 	padding: 0px;
 	line-height: 1.42857143;
 	vertical-align: top;

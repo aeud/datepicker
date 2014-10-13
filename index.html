@@ -65,19 +65,7 @@
 			'endInput': $('#toInput'),
 			'startDP': $('#startDP'),
 			'endDP': $('#endDP'),
-		}, function(from, to){
-			//alert([from, to]);
-		});
-		$('#inputFrom').focus(function(){
-			VF_datepicker.show();
-		});
-		$('#inputTo').focus(function(){
-			if (VF_datepicker.from) {
-				VF_datepicker.show();	
-			} else {
-				VF_datepicker.show();
-			}
-			VF_datepicker.removeTo();
+			'clearTxt': 'Clear dates'
 		});
 		</script>
 	</body>
