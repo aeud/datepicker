@@ -10,12 +10,12 @@
 	z-index: 99;
 	border: 1px solid #999;
 	padding: 10px 10px 30px;
+	background-color: #fff;
 }
 .vf-datepicker.active {
 	display: block;
 }
 .vf-datepicker .vf-datepicker-inside {
-	background-color: #fff;
 	padding: 5px 5px;
 	position: relative;
 }
