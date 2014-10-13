@@ -47,16 +47,10 @@
 		var ny = now.getFullYear();
 		var nm = now.getMonth();
 		VF_datepicker.datepicker(ny, nm, {
+			'start': null,
+			'end': null,
 			'monthNames': ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
 			'dayNames': ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
-			'from_chosen': function(from){
-				$('.inputFrom').val(from);
-			},
-			'to_chosen': function(from, to){
-				VF_datepicker.close();
-				$('.inputFrom').val(from);
-				$('.inputTo').val(to);
-			},
 			'startCtrl': $('#fromDisplay'),
 			'endCtrl': $('#toDisplay'),
 			'startDisplay': $('#fromDisplay'),
@@ -65,7 +59,25 @@
 			'endInput': $('#toInput'),
 			'startDP': $('#startDP'),
 			'endDP': $('#endDP'),
-			'clearTxt': 'Clear dates'
+			'clearTxt': 'Clear dates',
+			'displayFrom': function(from, to){
+				console.log(['from display', from, to]);
+			},
+			'displayTo': function(from, to){
+				console.log(['to display', from, to]);
+			},
+			'fromChosen': function(from, to){
+				console.log(['from chosen', from, to]);
+			},
+			'toChosen': function(from, to){
+				console.log(['to chosen', from, to]);
+			},
+			'hideFrom': function(from, to){
+				console.log(['from hide', from, to]);
+			},
+			'hideTo': function(from, to){
+				console.log(['to hide', from, to]);
+			},
 		});
 		</script>
 	</body>

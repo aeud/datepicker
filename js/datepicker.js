@@ -29,6 +29,9 @@ var VF_datepicker = {
 		VF_datepicker.startDP = VF_datepicker.options.startDP;
 		VF_datepicker.endDP = VF_datepicker.options.endDP;
 		
+		VF_datepicker.start = VF_datepicker.options.start;
+		VF_datepicker.end = VF_datepicker.options.end;
+		
 		var html = '';
 		html += '<div class="datepicker-inside">';
 		html += '<div class="pre-table">';
@@ -58,7 +61,8 @@ var VF_datepicker = {
 		} else {
 			$('.vf-datepicker').css('position', 'absolute');
 		}
-		if (VF_datepicker.options.init) VF_datepicker.options.init();
+		
+		VF_datepicker.setVariables();
 	},
 	displayMonths: function(currentYear, currentMonth){
 		this.currentYear = currentYear;
@@ -159,12 +163,18 @@ var VF_datepicker = {
 			VF_datepicker.setVariables();
 			VF_datepicker.hideStart();
 			if (!VF_datepicker.end) VF_datepicker.showEnd();
+			if (VF_datepicker.options.fromChosen) {
+				VF_datepicker.options.fromChosen(VF_datepicker.start, VF_datepicker.end);
+			}
 		} else {
 			VF_datepicker.setEnd(date);
 			VF_datepicker.inverseDates();
 			VF_datepicker.setSelection();
 			VF_datepicker.setVariables();
 			VF_datepicker.hideEnd();
+			if (VF_datepicker.options.toChosen) {
+				VF_datepicker.options.toChosen(VF_datepicker.start, VF_datepicker.end);
+			}
 		}
 		return false;
 	},
@@ -269,6 +279,9 @@ var VF_datepicker = {
 		$('.vf-datepicker').fadeIn();
 	},
 	showStart: function(){
+		if (VF_datepicker.options.displayFrom) {
+			VF_datepicker.options.displayFrom(VF_datepicker.start, VF_datepicker.end);
+		}
 		if (VF_datepicker.start) {
 			var tmp = VF_datepicker.start.split('-');
 			VF_datepicker.displayMonths(parseInt(tmp[0]), parseInt(tmp[1]) - 1);
@@ -280,9 +293,16 @@ var VF_datepicker = {
 		    if (!container.is(e.target) && container.has(e.target).length === 0){
 		        VF_datepicker.hideStart();
 		    }
+			if (VF_datepicker.options.hideFrom) {
+				VF_datepicker.options.hideFrom(VF_datepicker.start, VF_datepicker.end);
+			}
+			$(document).unbind('mouseup');
 		});
 	},
 	showEnd: function(){
+		if (VF_datepicker.options.displayTo) {
+			VF_datepicker.options.displayTo(VF_datepicker.start, VF_datepicker.end);
+		}
 		if (!VF_datepicker.start) {
 			VF_datepicker.showStart();
 		} else {
@@ -308,6 +328,10 @@ var VF_datepicker = {
 			    if (!container.is(e.target) && container.has(e.target).length === 0){
 			        VF_datepicker.hideEnd();
 			    }
+				if (VF_datepicker.options.hideTo) {
+					VF_datepicker.options.hideTo(VF_datepicker.start, VF_datepicker.end);
+				}
+				$(document).unbind('mouseup');
 			});
 		}
 	},
