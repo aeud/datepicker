@@ -13,8 +13,19 @@
 		<![endif]-->
 	</head>
 	<body>
-    	<input class="inputFrom"/><input class="inputTo"/>
-		<div class="datepicker" id="datepicker"></div>
+		<form class="form-inline" role="form" action="#">
+			<div class="form-group">
+				<span class="form-control" id="fromDisplay" name="from">Check in</span>
+				<input type="hidden" name="from" value="" id="fromInput">
+				<div class="vf-datepicker" id="startDP"></div>
+			</div>
+			<div class="form-group">
+				<span class="form-control" id="toDisplay">Check out</span>
+				<input type="hidden" name="to" value="" id="toInput">
+				<div class="vf-datepicker" id="endDP"></div>
+			</div>
+			<button type="submit" class="btn btn-default">Sign in</button>
+		</form>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script src="./js/datepicker.js"></script>
 		<script>
@@ -24,11 +35,7 @@
 		VF_datepicker.datepicker(ny, nm, {
 			'monthNames': ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
 			'dayNames': ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
-			'init': function(){
-				VF_datepicker.helper('Select your departure date.');
-			},
 			'from_chosen': function(from){
-				VF_datepicker.helper('Select your leaving date.');
 				$('.inputFrom').val(from);
 			},
 			'to_chosen': function(from, to){
@@ -36,17 +43,25 @@
 				$('.inputFrom').val(from);
 				$('.inputTo').val(to);
 			},
+			'startCtrl': $('#fromDisplay'),
+			'endCtrl': $('#toDisplay'),
+			'startDisplay': $('#fromDisplay'),
+			'endDisplay': $('#toDisplay'),
+			'startInput': $('#fromInput'),
+			'endInput': $('#toInput'),
+			'startDP': $('#startDP'),
+			'endDP': $('#endDP'),
 		}, function(from, to){
 			//alert([from, to]);
 		});
-		$('.inputFrom').focus(function(){
-			VF_datepicker.show('Select your departure date.');
+		$('#inputFrom').focus(function(){
+			VF_datepicker.show();
 		});
-		$('.inputTo').focus(function(){
+		$('#inputTo').focus(function(){
 			if (VF_datepicker.from) {
-				VF_datepicker.show('Select your leaving date.');	
+				VF_datepicker.show();	
 			} else {
-				VF_datepicker.show('Select your departure date.');
+				VF_datepicker.show();
 			}
 			VF_datepicker.removeTo();
 		});
