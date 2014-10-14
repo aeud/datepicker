@@ -15,7 +15,7 @@ var VF_datepicker = {
 	endDP: null,
 	startDisplayOriginal: null,
 	endDisplayOriginal: null,
-	datepicker: function(ny, nm, options){
+	datepicker: function(options){
 		prev = null;
 		VF_datepicker.options = options;
 		VF_datepicker.startCtrl = VF_datepicker.options.startCtrl;
@@ -50,6 +50,16 @@ var VF_datepicker = {
 		html += '<a class="vf-clear" href="#">' + VF_datepicker.options.clearTxt + '</a>';
 		html += '</div>';
 		$('.vf-datepicker').html(html);
+		
+		if (VF_datepicker.start) {
+			var tmp = VF_datepicker.start.split('-');
+			var ny = parseInt(tmp[0]);
+			var nm = parseInt(tmp[1]) - 1;
+		} else {
+			var date = new Date();
+			var ny = date.getFullYear();
+			var nm = date.getMonth() + 1;
+		}
 		VF_datepicker.displayMonths(ny, nm);
 		VF_datepicker.controlArrows();
 		$('.show-datepicker').click(function(){
