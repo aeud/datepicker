@@ -67,9 +67,6 @@
 .vf-datepicker .week .day.drag-to {
 	border-radius: 0 10px 10px 0;
 }
-.vf-datepicker .day.black {
-	color: #eee;
-}
 .vf-datepicker .go {
 	position: absolute;
 	top: -5px;
@@ -100,8 +97,17 @@
 .vf-datepicker .close a:hover {
 	color: #bbb;
 }
+.vf-datepicker .day.black {
+	color: #eee;
+	background-color: #fff;
+}
+.vf-datepicker .day.request-full:hover,
 .vf-datepicker .request-full {
 	background-color: rgba(241,241,241,1);
+	color: #1f1f1f;
+}
+.vf-datepicker .day.black.request-full {
+	background-color: #fbfbfb;
 }
 .vf-datepicker .request-pm {
 	background: rgb(255,255,255);

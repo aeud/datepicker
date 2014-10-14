@@ -32,6 +32,8 @@ var VF_datepicker = {
 		VF_datepicker.start = VF_datepicker.options.start;
 		VF_datepicker.end = VF_datepicker.options.end;
 		
+		VF_datepicker.chosen = VF_datepicker.options.chosen;
+		
 		var html = '';
 		html += '<div class="datepicker-inside">';
 		html += '<div class="pre-table">';
@@ -66,10 +68,10 @@ var VF_datepicker = {
 			$('.vf-datepicker').addClass('active');
 			return false;
 		});
-		if (options.relative == true) {
-			$('.vf-datepicker').css('position', 'relative');
-		} else {
-			$('.vf-datepicker').css('position', 'absolute');
+		$('.vf-datepicker').css('position', 'absolute');
+		if (VF_datepicker.options.positions) {
+			VF_datepicker.startDP.css(VF_datepicker.options.positions[0], '0');
+			VF_datepicker.endDP.css(VF_datepicker.options.positions[1], '0');
 		}
 		
 		VF_datepicker.setVariables();
@@ -186,6 +188,7 @@ var VF_datepicker = {
 				VF_datepicker.options.toChosen(VF_datepicker.start, VF_datepicker.end);
 			}
 		}
+		if (VF_datepicker.chosen) VF_datepicker.chosen(VF_datepicker.start, VF_datepicker.end);
 		return false;
 	},
 	inverseDates: function(){
@@ -302,11 +305,11 @@ var VF_datepicker = {
 		    var container = VF_datepicker.startDP;
 		    if (!container.is(e.target) && container.has(e.target).length === 0){
 		        VF_datepicker.hideStart();
+				if (VF_datepicker.options.hideFrom) {
+					VF_datepicker.options.hideFrom(VF_datepicker.start, VF_datepicker.end);
+				}
+				$(document).unbind('mouseup');
 		    }
-			if (VF_datepicker.options.hideFrom) {
-				VF_datepicker.options.hideFrom(VF_datepicker.start, VF_datepicker.end);
-			}
-			$(document).unbind('mouseup');
 		});
 	},
 	showEnd: function(){
@@ -337,11 +340,11 @@ var VF_datepicker = {
 			    var container = VF_datepicker.endDP;
 			    if (!container.is(e.target) && container.has(e.target).length === 0){
 			        VF_datepicker.hideEnd();
+					if (VF_datepicker.options.hideTo) {
+						VF_datepicker.options.hideTo(VF_datepicker.start, VF_datepicker.end);
+					}
+					$(document).unbind('mouseup');
 			    }
-				if (VF_datepicker.options.hideTo) {
-					VF_datepicker.options.hideTo(VF_datepicker.start, VF_datepicker.end);
-				}
-				$(document).unbind('mouseup');
 			});
 		}
 	},

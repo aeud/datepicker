@@ -40,9 +40,116 @@
 				</div>
 			</div>
 		</div>
+		test
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script src="./js/datepicker.js"></script>
 		<script>
+		var _unavailable = [];
+		 var _onrequest = [];
+		  _unavailable.push('2014-10-23');
+		  _unavailable.push('2014-10-24');
+		  _unavailable.push('2014-10-25');
+		  _unavailable.push('2014-10-26');
+		  _unavailable.push('2014-10-27');
+		  _unavailable.push('2014-10-28');
+		  _unavailable.push('2014-10-29');
+		  _unavailable.push('2014-10-30');
+		  _unavailable.push('2014-10-31');
+		  _unavailable.push('2015-03-03');
+		  _unavailable.push('2015-03-04');
+		  _unavailable.push('2015-03-05');
+		  _unavailable.push('2015-03-06');
+		  _unavailable.push('2014-09-04');
+		  _unavailable.push('2014-09-05');
+		  _unavailable.push('2014-09-06');
+		  _unavailable.push('2014-09-07');
+		  _unavailable.push('2014-09-08');
+		  _unavailable.push('2014-09-09');
+		  _unavailable.push('2014-09-10');
+		  _unavailable.push('2014-09-11');
+		  _unavailable.push('2014-09-12');
+		  _unavailable.push('2014-09-13');
+		  _unavailable.push('2014-09-16');
+		  _unavailable.push('2014-09-17');
+		  _unavailable.push('2014-09-18');
+		  _unavailable.push('2014-09-19');
+		  _unavailable.push('2014-09-20');
+		  _unavailable.push('2014-09-21');
+		  _unavailable.push('2014-08-22');
+		  _unavailable.push('2014-08-23');
+		  _unavailable.push('2014-08-24');
+		  _unavailable.push('2014-07-01');
+		  _unavailable.push('2014-07-02');
+		  _unavailable.push('2014-07-03');
+		  _unavailable.push('2014-07-04');
+		  _unavailable.push('2014-07-05');
+		  _unavailable.push('2014-07-06');
+		  _unavailable.push('2014-07-07');
+		  _unavailable.push('2014-07-08');
+		  _unavailable.push('2014-07-09');
+		  _unavailable.push('2014-07-10');
+		  _unavailable.push('2014-07-11');
+		  _unavailable.push('2014-07-12');
+		  _unavailable.push('2014-07-13');
+		  _unavailable.push('2014-07-14');
+		  _unavailable.push('2014-07-15');
+		  _unavailable.push('2014-07-16');
+		  _unavailable.push('2014-07-17');
+		  _unavailable.push('2014-07-18');
+		  _unavailable.push('2014-07-19');
+		  _unavailable.push('2014-07-20');
+		  _unavailable.push('2014-07-21');
+		  _unavailable.push('2014-07-22');
+		  _unavailable.push('2014-07-23');
+		  _unavailable.push('2014-07-24');
+		  _unavailable.push('2014-07-25');
+		  _unavailable.push('2014-07-26');
+		  _unavailable.push('2014-07-27');
+		  _unavailable.push('2014-07-28');
+		  _unavailable.push('2014-07-29');
+		  _unavailable.push('2014-07-30');
+		  _unavailable.push('2014-07-31');
+		  _unavailable.push('2014-08-01');
+		  _unavailable.push('2014-08-02');
+		  _unavailable.push('2014-08-03');
+		  _unavailable.push('2014-08-04');
+		  _unavailable.push('2014-08-05');
+		  _unavailable.push('2014-08-06');
+		  _unavailable.push('2014-08-07');
+		  _unavailable.push('2014-08-08');
+		  _unavailable.push('2014-08-09');
+		  _unavailable.push('2014-08-10');
+		  _unavailable.push('2014-08-11');
+		  _unavailable.push('2014-08-12');
+		  _unavailable.push('2014-08-13');
+		  _unavailable.push('2014-08-14');
+		  _unavailable.push('2014-08-15');
+		  _unavailable.push('2014-08-16');
+		  _unavailable.push('2014-08-17');
+		  _unavailable.push('2014-08-18');
+		  _unavailable.push('2014-08-19');
+		  _unavailable.push('2014-08-20');
+		  _unavailable.push('2014-08-21');
+		  _unavailable.push('2014-12-30');
+		  _unavailable.push('2014-12-31');
+		  _unavailable.push('2015-01-01');
+		  _unavailable.push('2015-01-02');
+		  _unavailable.push('2015-01-03');
+		  _unavailable.push('2015-01-25');
+		  _unavailable.push('2015-01-26');
+		  _unavailable.push('2015-01-27');
+		  _unavailable.push('2015-01-28');
+		  _unavailable.push('2015-01-29');
+		  _unavailable.push('2015-01-30');
+		  _unavailable.push('2015-01-31');
+		  _unavailable.push('2015-02-01');
+		  _unavailable.push('2015-02-02');
+		  _unavailable.push('2015-02-03');
+		  _unavailable.push('2014-08-25');
+		  _unavailable.push('2014-08-26');
+		  _unavailable.push('2014-08-27');
+		
+		
 		VF_datepicker.datepicker({
 			'start': null,
 			'end': null,
@@ -57,6 +164,8 @@
 			'startDP': $('#startDP'),
 			'endDP': $('#endDP'),
 			'clearTxt': 'Clear dates',
+			'unavailable': _unavailable,
+			'onrequest': _onrequest,
 			'displayFrom': function(from, to){
 				console.log(['from display', from, to]);
 			},
@@ -75,6 +184,7 @@
 			'hideTo': function(from, to){
 				console.log(['to hide', from, to]);
 			},
+			'positions': ['left', 'right']
 		});
 		</script>
 	</body>
