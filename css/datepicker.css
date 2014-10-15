@@ -7,7 +7,7 @@
 .vf-datepicker {
 	position: relative;
 	display: none;
-	z-index: 99;
+	z-index: 1061;
 	border: 1px solid #999;
 	padding: 10px 10px 30px;
 	background-color: #fff;

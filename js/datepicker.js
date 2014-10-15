@@ -65,7 +65,7 @@ function VF_datepicker () {
 		html += '</div>';
 		html += '<a class="vf-clear" href="#">' + this.options.clearTxt + '</a>';
 		html += '</div>';
-		$('.dp-' + this.name).html(html);
+		$('.vf-datepicker.dp-' + this.name).html(html);
 		
 		if (this.start) {
 			var tmp = this.start.split('-');
@@ -91,7 +91,7 @@ function VF_datepicker () {
 		this.currentMonth = currentMonth;
 		this.process(new Date(currentYear, currentMonth, 1), new Date(currentYear, currentMonth + 1, 1), '.dp-' + this.name + ' .vf-month1');
 		var dp = this;
-		$('.dp-' + this.name + ' .day').click(function(){
+		$('.vf-datepicker.dp-' + this.name + ' .day').click(function(){
 			var drag = dp.drag;
 			var date = $(this).data('date');
 			if (!drag) {
@@ -225,11 +225,11 @@ function VF_datepicker () {
 			return false;
 		});
 		$('.dp-' + this.name +  ' .go.go-left a').click(function(){
-			dp.displayMonths(this.currentYear, this.currentMonth - 1);
+			dp.displayMonths(dp.currentYear, dp.currentMonth - 1);
 			return false;
 		});
 		$('.dp-' + this.name + ' .go.go-right a').click(function(){
-			dp.displayMonths(this.currentYear, this.currentMonth + 1);
+			dp.displayMonths(dp.currentYear, dp.currentMonth + 1);
 			return false;
 		});
 		$('.dp-' + this.name + ' .close a').click(function(){
@@ -251,7 +251,7 @@ function VF_datepicker () {
 		});
 	},
 	this.setStart = function(start) {
-		this.start  = start;
+		this.start = start;
 	},
 	this.setEnd = function(end) {
 		this.end  = end;
