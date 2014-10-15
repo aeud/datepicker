@@ -1,38 +1,52 @@
-var VF_datepicker = {
-	drag: 0,
-	currentYear: 0,
-	currentMonth: 0,
-	start: null,
-	end: null,
-	options: {},
-	startCtrl: null,
-	endCtrl: null,
-	startDisplay: null,
-	endDisplay: null,
-	startInput: null,
-	endInput: null,
-	startDP: null,
-	endDP: null,
-	startDisplayOriginal: null,
-	endDisplayOriginal: null,
-	datepicker: function(options){
+function VF_datepicker () {
+	this.name = 'test',
+	this.drag = 0,
+	this.currentYear = 0,
+	this.currentMonth = 0,
+	this.start = null,
+	this.end = null,
+	this.options = {},
+	this.startCtrl = null,
+	this.endCtrl = null,
+	this.startDisplay = null,
+	this.endDisplay = null,
+	this.startInput = null,
+	this.endInput = null,
+	this.startDP = null,
+	this.endDP = null,
+	this.startDisplayOriginal = null,
+	this.endDisplayOriginal = null,
+	this.datepicker = function(options){
 		prev = null;
-		VF_datepicker.options = options;
-		VF_datepicker.startCtrl = VF_datepicker.options.startCtrl;
-		VF_datepicker.endCtrl = VF_datepicker.options.endCtrl;
-		VF_datepicker.startDisplay = VF_datepicker.options.startDisplay;
-		VF_datepicker.endDisplay = VF_datepicker.options.endDisplay;
-		VF_datepicker.startInput = VF_datepicker.options.startInput;
-		VF_datepicker.endInput = VF_datepicker.options.endInput;
-		VF_datepicker.startDisplayOriginal = VF_datepicker.startDisplay.html();
-		VF_datepicker.endDisplayOriginal = VF_datepicker.endDisplay.html();
-		VF_datepicker.startDP = VF_datepicker.options.startDP;
-		VF_datepicker.endDP = VF_datepicker.options.endDP;
+		this.options = options;
+		this.startCtrl = this.options.startCtrl;
+		this.endCtrl = this.options.endCtrl;
+		this.startDisplay = this.options.startDisplay;
+		this.endDisplay = this.options.endDisplay;
+		this.startInput = this.options.startInput;
+		this.endInput = this.options.endInput;
+		this.startDisplayOriginal = this.startDisplay.html();
+		this.endDisplayOriginal = this.endDisplay.html();
+		this.startDP = this.options.startDP;
+		this.endDP = this.options.endDP;
 		
-		VF_datepicker.start = VF_datepicker.options.start;
-		VF_datepicker.end = VF_datepicker.options.end;
+		this.name = this.options.name;
 		
-		VF_datepicker.chosen = VF_datepicker.options.chosen;
+		this.startCtrl.addClass('dp-' + this.name);
+		this.endCtrl.addClass('dp-' + this.name);
+		this.startDisplay.addClass('dp-' + this.name);
+		this.endDisplay.addClass('dp-' + this.name);
+		this.startInput.addClass('dp-' + this.name);
+		this.endInput.addClass('dp-' + this.name);
+		this.startDP.addClass('dp-' + this.name);
+		this.endDP.addClass('dp-' + this.name);
+		
+		this.start = this.options.start;
+		this.end = this.options.end;
+		
+		this.chosen = this.options.chosen;
+		
+		console.log(this.name);
 		
 		var html = '';
 		html += '<div class="datepicker-inside">';
@@ -49,12 +63,12 @@ var VF_datepicker = {
 		html += '</tr>';
 		html += '</table>';
 		html += '</div>';
-		html += '<a class="vf-clear" href="#">' + VF_datepicker.options.clearTxt + '</a>';
+		html += '<a class="vf-clear" href="#">' + this.options.clearTxt + '</a>';
 		html += '</div>';
-		$('.vf-datepicker').html(html);
+		$('.dp-' + this.name).html(html);
 		
-		if (VF_datepicker.start) {
-			var tmp = VF_datepicker.start.split('-');
+		if (this.start) {
+			var tmp = this.start.split('-');
 			var ny = parseInt(tmp[0]);
 			var nm = parseInt(tmp[1]) - 1;
 		} else {
@@ -62,27 +76,49 @@ var VF_datepicker = {
 			var ny = date.getFullYear();
 			var nm = date.getMonth() + 1;
 		}
-		VF_datepicker.displayMonths(ny, nm);
-		VF_datepicker.controlArrows();
-		$('.show-datepicker').click(function(){
-			$('.vf-datepicker').addClass('active');
-			return false;
-		});
-		$('.vf-datepicker').css('position', 'absolute');
-		if (VF_datepicker.options.positions) {
-			VF_datepicker.startDP.css(VF_datepicker.options.positions[0], '0');
-			VF_datepicker.endDP.css(VF_datepicker.options.positions[1], '0');
+		this.displayMonths(ny, nm);
+		this.controlArrows();
+		$('.vf-datepicker.dp-' + this.name).css('position', 'absolute');
+		if (this.options.positions) {
+			this.startDP.css(this.options.positions[0], '0');
+			this.endDP.css(this.options.positions[1], '0');
 		}
 		
-		VF_datepicker.setVariables();
+		this.setVariables();
 	},
-	displayMonths: function(currentYear, currentMonth){
+	this.displayMonths = function(currentYear, currentMonth){
 		this.currentYear = currentYear;
 		this.currentMonth = currentMonth;
-		this.process(new Date(currentYear, currentMonth, 1), new Date(currentYear, currentMonth + 1, 1), '.vf-datepicker .vf-month1');
-		$('.vf-datepicker .day').click(VF_datepicker.selection);
+		this.process(new Date(currentYear, currentMonth, 1), new Date(currentYear, currentMonth + 1, 1), '.dp-' + this.name + ' .vf-month1');
+		var dp = this;
+		$('.dp-' + this.name + ' .day').click(function(){
+			var drag = dp.drag;
+			var date = $(this).data('date');
+			if (!drag) {
+				dp.setStart(date);
+				dp.inverseDates();
+				dp.setSelection();
+				dp.setVariables();
+				dp.hideStart();
+				if (!dp.end) dp.showEnd();
+				if (dp.options.fromChosen) {
+					dp.options.fromChosen(dp.start, dp.end);
+				}
+			} else {
+				dp.setEnd(date);
+				dp.inverseDates();
+				dp.setSelection();
+				dp.setVariables();
+				dp.hideEnd();
+				if (dp.options.toChosen) {
+					dp.options.toChosen(dp.start, dp.end);
+				}
+			}
+			if (dp.chosen) dp.chosen(dp.start, dp.end);
+			return false;
+		});
 	},
-	process: function(from, to, id){
+	this.process = function(from, to, id){
 		var fromExtra = new Date(from.getFullYear(), from.getMonth(), 1);
 		var toExtra = new Date(to.getFullYear(), to.getMonth(), 1);
 		var month = [];
@@ -96,7 +132,7 @@ var VF_datepicker = {
 			var dm = '' + ((d.getMonth() + 1) < 10 ? '0' : '') + (d.getMonth() + 1);
 			var dd = '' + (d.getDate() < 10 ? '0' : '') + d.getDate();
 			var DPclass = '';
-			var DPUnavailable = VF_datepicker.options.unavailable ? VF_datepicker.options.unavailable : [];
+			var DPUnavailable = this.options.unavailable ? this.options.unavailable : [];
 			if (Array.prototype.indexOf) {
 				if (DPUnavailable.indexOf(dy + '-' + dm + '-' + dd) !== -1) {
 					if (prev) {
@@ -117,7 +153,7 @@ var VF_datepicker = {
 				'year': dy,
 				'day': dd,
 				'black': (d < from || d >= to),
-				'month': VF_datepicker.options.monthNames[d.getMonth()],
+				'month': this.options.monthNames[d.getMonth()],
 				'DPclass': DPclass
 			});
 			if (fromExtra.getDay() == 0) {
@@ -132,13 +168,13 @@ var VF_datepicker = {
 		html += '<th colspan="7">' + month[1][1].month + ' ' + month[1][1].year + '</th>';
 		html += '</tr>';
 		html += '<tr class="head-days">';
-		html += '<th>' + VF_datepicker.options.dayNames[1].slice(0,2) + '</th>';
-		html += '<th>' + VF_datepicker.options.dayNames[2].slice(0,2) + '</th>';
-		html += '<th>' + VF_datepicker.options.dayNames[3].slice(0,2) + '</th>';
-		html += '<th>' + VF_datepicker.options.dayNames[4].slice(0,2) + '</th>';
-		html += '<th>' + VF_datepicker.options.dayNames[5].slice(0,2) + '</th>';
-		html += '<th>' + VF_datepicker.options.dayNames[6].slice(0,2) + '</th>';
-		html += '<th>' + VF_datepicker.options.dayNames[0].slice(0,2) + '</th>';
+		html += '<th>' + this.options.dayNames[1].slice(0,2) + '</th>';
+		html += '<th>' + this.options.dayNames[2].slice(0,2) + '</th>';
+		html += '<th>' + this.options.dayNames[3].slice(0,2) + '</th>';
+		html += '<th>' + this.options.dayNames[4].slice(0,2) + '</th>';
+		html += '<th>' + this.options.dayNames[5].slice(0,2) + '</th>';
+		html += '<th>' + this.options.dayNames[6].slice(0,2) + '</th>';
+		html += '<th>' + this.options.dayNames[0].slice(0,2) + '</th>';
 		html += '</tr>';
 		for (var i = 0; i < month.length; i++) {
 			html += '<tr class="week">';
@@ -151,8 +187,8 @@ var VF_datepicker = {
 				html += ' ';
 				html += month[i][j].DPclass;
 				html += ' day-' + month[i][j].date;
-				html += (VF_datepicker.start && VF_datepicker.start == month[i][j].date ? ' drag-from' : '');
-				html += (VF_datepicker.end && VF_datepicker.end == month[i][j].date ? ' drag-to' : '');
+				html += (this.start && this.start == month[i][j].date ? ' drag-from' : '');
+				html += (this.end && this.end == month[i][j].date ? ' drag-to' : '');
 				html += '">';
 				html += '<div class="value">';
 				html += month[i][j].day;
@@ -165,193 +201,170 @@ var VF_datepicker = {
 		html += '</table>';
 		$(id).html(html);
 	},
-	selection: function(){
-		var drag = VF_datepicker.drag;
-		var date = $(this).data('date');
-		if (!drag) {
-			VF_datepicker.setStart(date);
-			VF_datepicker.inverseDates();
-			VF_datepicker.setSelection();
-			VF_datepicker.setVariables();
-			VF_datepicker.hideStart();
-			if (!VF_datepicker.end) VF_datepicker.showEnd();
-			if (VF_datepicker.options.fromChosen) {
-				VF_datepicker.options.fromChosen(VF_datepicker.start, VF_datepicker.end);
-			}
-		} else {
-			VF_datepicker.setEnd(date);
-			VF_datepicker.inverseDates();
-			VF_datepicker.setSelection();
-			VF_datepicker.setVariables();
-			VF_datepicker.hideEnd();
-			if (VF_datepicker.options.toChosen) {
-				VF_datepicker.options.toChosen(VF_datepicker.start, VF_datepicker.end);
-			}
-		}
-		if (VF_datepicker.chosen) VF_datepicker.chosen(VF_datepicker.start, VF_datepicker.end);
-		return false;
-	},
-	inverseDates: function(){
-		if (VF_datepicker.start && VF_datepicker.end) {
-			var fromArray = VF_datepicker.start.split('-');
+	this.inverseDates = function(){
+		if (this.start && this.end) {
+			var fromArray = this.start.split('-');
 			var fromDate = new Date(parseInt(fromArray[0]), parseInt(fromArray[1]) - 1, parseInt(fromArray[2]));
-			var toArray = VF_datepicker.end.split('-');
+			var toArray = this.end.split('-');
 			var toDate = new Date(parseInt(toArray[0]), parseInt(toArray[1]) - 1, parseInt(toArray[2]));
 			if (toDate < fromDate) {
-				var tmp = VF_datepicker.start;
-				VF_datepicker.setStart(VF_datepicker.end);
-				VF_datepicker.setEnd(tmp);
+				var tmp = this.start;
+				this.setStart(this.end);
+				this.setEnd(tmp);
 			}
 		}
 	},
-	controlArrows: function(){
-		VF_datepicker.startCtrl.click(function(){
-			VF_datepicker.showStart();
+	this.controlArrows = function(){
+		var dp = this;
+		this.startCtrl.click(function(){
+			dp.showStart();
 			return false;
 		});
-		VF_datepicker.endCtrl.click(function(){
-			VF_datepicker.showEnd();
+		this.endCtrl.click(function(){
+			dp.showEnd();
 			return false;
 		});
-		$('.vf-datepicker .go.go-left a').click(function(){
-			VF_datepicker.displayMonths(VF_datepicker.currentYear, VF_datepicker.currentMonth - 1);
+		$('.dp-' + this.name +  ' .go.go-left a').click(function(){
+			dp.displayMonths(this.currentYear, this.currentMonth - 1);
 			return false;
 		});
-		$('.vf-datepicker .go.go-right a').click(function(){
-			VF_datepicker.displayMonths(VF_datepicker.currentYear, VF_datepicker.currentMonth + 1);
+		$('.dp-' + this.name + ' .go.go-right a').click(function(){
+			dp.displayMonths(this.currentYear, this.currentMonth + 1);
 			return false;
 		});
-		$('.vf-datepicker .close a').click(function(){
-			$('.vf-datepicker.active').removeClass('active');
-			VF_datepicker.start = null;
-			VF_datepicker.end = null;
-			VF_datepicker.drag = 0;
+		$('.dp-' + this.name + ' .close a').click(function(){
+			$('.dp-' + this.name + '.active').removeClass('active');
+			dp.start = null;
+			dp.end = null;
+			dp.drag = 0;
 			return false;
 		});
-		$('.vf-datepicker .dates .date-to').click(function(){
-			VF_datepicker.removeTo();
+		$('.dp-' + this.name + ' .dates .date-to').click(function(){
+			dp.removeTo();
 		});
-		$('.vf-datepicker .dates .date-from').click(function(){
-			VF_datepicker.removeFrom();
+		$('.dp-' + this.name + ' .dates .date-from').click(function(){
+			dp.removeFrom();
 		});
-		$('.vf-datepicker .vf-clear').click(function(){
-			VF_datepicker.clear();
+		$('.dp-' + this.name + ' .vf-clear').click(function(){
+			dp.clear();
 			return false;
 		});
 	},
-	setStart: function(start) {
-		VF_datepicker.start  = start;
+	this.setStart = function(start) {
+		this.start  = start;
 	},
-	setEnd: function(end) {
-		VF_datepicker.end  = end;
+	this.setEnd = function(end) {
+		this.end  = end;
 	},
-	setStartVariables: function() {
-		var start = VF_datepicker.start;
-		VF_datepicker.startInput.val(start);
+	this.setStartVariables = function() {
+		var start = this.start;
+		this.startInput.val(start);
 		if (start) {
-			VF_datepicker.startDisplay.html(start.split('-').reverse().join('/'));
+			this.startDisplay.html(start.split('-').reverse().join('/'));
 		} else {
-			VF_datepicker.startDisplay.html(VF_datepicker.startDisplayOriginal);
+			this.startDisplay.html(this.startDisplayOriginal);
 		}
 	},
-	setEndVariables: function() {
-		var end = VF_datepicker.end;
-		VF_datepicker.endInput.val(end);
+	this.setEndVariables = function() {
+		var end = this.end;
+		this.endInput.val(end);
 		if (end) {
-			VF_datepicker.endDisplay.html(end.split('-').reverse().join('/'));
+			this.endDisplay.html(end.split('-').reverse().join('/'));
 		} else {
-			VF_datepicker.endDisplay.html(VF_datepicker.endDisplayOriginal);
+			this.endDisplay.html(this.endDisplayOriginal);
 		}
 	},
-	setSelection: function() {
-		if (VF_datepicker.start) {
-			$('.drag-from').removeClass('drag-from');
-			$('.day-' + VF_datepicker.start).addClass('drag-from');
+	this.setSelection = function() {
+		if (this.start) {
+			$('.dp-' + this.name + ' .drag-from').removeClass('drag-from');
+			$('.dp-' + this.name + ' .day-' + this.start).addClass('drag-from');
 		}
-		if (VF_datepicker.end) {
-			$('.drag-to').removeClass('drag-to');
-			$('.day-' + VF_datepicker.end).addClass('drag-to');
+		if (this.end) {
+			$('.dp-' + this.name + ' .drag-to').removeClass('drag-to');
+			$('.dp-' + this.name + ' .day-' + this.end).addClass('drag-to');
 		}
 	},
-	setVariables: function() {
-		VF_datepicker.setStartVariables();
-		VF_datepicker.setEndVariables();
+	this.setVariables = function() {
+		this.setStartVariables();
+		this.setEndVariables();
 	},
-	clear: function(){
-		VF_datepicker.setStart(null);
-		VF_datepicker.setEnd(null);
-		VF_datepicker.setVariables();
-		VF_datepicker.closeAll();
+	this.clear = function(){
+		this.setStart(null);
+		this.setEnd(null);
+		this.setVariables();
+		this.closeAll();
 		$('.drag-from').removeClass('drag-from');
 		$('.drag-to').removeClass('drag-to');
 	},
-	closeAll: function(){
+	this.closeAll = function(){
 		$('.vf-datepicker').fadeOut();
 	},
-	showAll: function(text){
+	this.showAll = function(text){
 		$('.vf-datepicker').fadeIn();
 	},
-	showStart: function(){
-		if (VF_datepicker.options.displayFrom) {
-			VF_datepicker.options.displayFrom(VF_datepicker.start, VF_datepicker.end);
+	this.showStart = function(){
+		if (this.options.displayFrom) {
+			this.options.displayFrom(this.start, this.end);
 		}
-		if (VF_datepicker.start) {
-			var tmp = VF_datepicker.start.split('-');
-			VF_datepicker.displayMonths(parseInt(tmp[0]), parseInt(tmp[1]) - 1);
+		if (this.start) {
+			var tmp = this.start.split('-');
+			this.displayMonths(parseInt(tmp[0]), parseInt(tmp[1]) - 1);
 		}
-		VF_datepicker.drag = 0;
-		VF_datepicker.startDP.fadeIn();
+		this.drag = 0;
+		this.startDP.fadeIn();
+		var dp = this;
 		$(document).mouseup(function (e) {
-		    var container = VF_datepicker.startDP;
+		    var container = dp.startDP;
 		    if (!container.is(e.target) && container.has(e.target).length === 0){
-		        VF_datepicker.hideStart();
-				if (VF_datepicker.options.hideFrom) {
-					VF_datepicker.options.hideFrom(VF_datepicker.start, VF_datepicker.end);
+		        dp.hideStart();
+				if (dp.options.hideFrom) {
+					dp.options.hideFrom(dp.start, dp.end);
 				}
 				$(document).unbind('mouseup');
 		    }
 		});
 	},
-	showEnd: function(){
-		if (VF_datepicker.options.displayTo) {
-			VF_datepicker.options.displayTo(VF_datepicker.start, VF_datepicker.end);
+	this.showEnd = function(){
+		if (this.options.displayTo) {
+			this.options.displayTo(this.start, this.end);
 		}
-		if (!VF_datepicker.start) {
-			VF_datepicker.showStart();
+		if (!this.start) {
+			this.showStart();
 		} else {
-			if (!VF_datepicker.end && VF_datepicker.start) {
-				var tmpStart = VF_datepicker.start.split('-');
+			if (!this.end && this.start) {
+				var tmpStart = this.start.split('-');
 				var tmp = new Date(parseInt(tmpStart[0]), parseInt(tmpStart[1]) - 1, parseInt(tmpStart[2]) + 6);
 				var m = tmp.getMonth() + 1;
 				var d = tmp.getDate() + 1;
 				m = ((m < 10) ? '0' : '') + m;
 				d = ((d < 10) ? '0' : '') + d;
-				VF_datepicker.setEnd([tmp.getFullYear(), m, d].join('-'));
-				VF_datepicker.setVariables();
-				VF_datepicker.setSelection();
+				this.setEnd([tmp.getFullYear(), m, d].join('-'));
+				this.setVariables();
+				this.setSelection();
 			}
-			if (VF_datepicker.end) {
-				var tmp = VF_datepicker.end.split('-');
-				VF_datepicker.displayMonths(parseInt(tmp[0]), parseInt(tmp[1]) - 1);
+			if (this.end) {
+				var tmp = this.end.split('-');
+				this.displayMonths(parseInt(tmp[0]), parseInt(tmp[1]) - 1);
 			}
-			VF_datepicker.drag = 1;
-			VF_datepicker.endDP.fadeIn();
+			this.drag = 1;
+			this.endDP.fadeIn();
+			var dp = this;
 			$(document).mouseup(function (e) {
-			    var container = VF_datepicker.endDP;
+			    var container = dp.endDP;
 			    if (!container.is(e.target) && container.has(e.target).length === 0){
-			        VF_datepicker.hideEnd();
-					if (VF_datepicker.options.hideTo) {
-						VF_datepicker.options.hideTo(VF_datepicker.start, VF_datepicker.end);
+			        dp.hideEnd();
+					if (dp.options.hideTo) {
+						dp.options.hideTo(dp.start, dp.end);
 					}
 					$(document).unbind('mouseup');
 			    }
 			});
 		}
 	},
-	hideStart: function(){
-		VF_datepicker.startDP.fadeOut();
+	this.hideStart = function(){
+		this.startDP.fadeOut();
 	},
-	hideEnd: function(){
-		VF_datepicker.endDP.fadeOut();
-	},
+	this.hideEnd = function(){
+		this.endDP.fadeOut();
+	}
 }

@@ -16,7 +16,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8">
-					<form class="" role="form" action="#">
+					<form id="form1" role="form" action="#">
 						<div class="row">
 							<div class="col-sm-4">
 								<div class="form-group">
@@ -30,6 +30,27 @@
 									<span class="form-control" id="toDisplay">Check out</span>
 									<input type="hidden" name="to" value="" id="toInput">
 									<div class="vf-datepicker" id="endDP"></div>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<button type="submit" class="btn btn-default btn-block">Search</button>
+							</div>
+						</div>
+					</form>
+					<form id="form2" role="form" action="#">
+						<div class="row">
+							<div class="col-sm-4">
+								<div class="form-group">
+									<span class="form-control" id="fromDisplay2" name="from">Check in</span>
+									<input type="hidden" name="from" value="" id="fromInput2">
+									<div class="vf-datepicker" id="startDP2"></div>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="form-group">
+									<span class="form-control" id="toDisplay2">Check out</span>
+									<input type="hidden" name="to" value="" id="toInput2">
+									<div class="vf-datepicker" id="endDP2"></div>
 								</div>
 							</div>
 							<div class="col-sm-4">
@@ -149,7 +170,9 @@
 		  _unavailable.push('2014-08-27');
 		
 		
-		VF_datepicker.datepicker({
+		var dp = new VF_datepicker();
+		dp.datepicker({
+			'name': 'form1',
 			'start': null,
 			'end': null,
 			'monthNames': ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
@@ -182,6 +205,45 @@
 			},
 			'hideTo': function(from, to){
 				console.log(['to hide', from, to]);
+			},
+			'positions': ['left', 'right']
+		});
+		
+		var dp2 = new VF_datepicker();
+		dp2.datepicker({
+			'name': 'form2',
+			'start': null,
+			'end': null,
+			'monthNames': ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+			'dayNames': ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+			'startCtrl': $('#fromDisplay2'),
+			'endCtrl': $('#toDisplay2'),
+			'startDisplay': $('#fromDisplay2'),
+			'endDisplay': $('#toDisplay2'),
+			'startInput': $('#fromInput2'),
+			'endInput': $('#toInput2'),
+			'startDP': $('#startDP2'),
+			'endDP': $('#endDP2'),
+			'clearTxt': 'Clear dates',
+			'unavailable': _unavailable,
+			'onrequest': _onrequest,
+			'displayFrom': function(from, to){
+				console.log(['from display2', from, to]);
+			},
+			'displayTo': function(from, to){
+				console.log(['to display2', from, to]);
+			},
+			'fromChosen': function(from, to){
+				console.log(['from chosen2', from, to]);
+			},
+			'toChosen': function(from, to){
+				console.log(['to chosen2', from, to]);
+			},
+			'hideFrom': function(from, to){
+				console.log(['from hide2', from, to]);
+			},
+			'hideTo': function(from, to){
+				console.log(['to hide2', from, to]);
 			},
 			'positions': ['left', 'right']
 		});
